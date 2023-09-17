@@ -1,0 +1,87 @@
+{% include("header.html") %}
+{% block  body %}
+<section id="landing_page">
+    <div class="top-container">
+        {% if main == None %}
+        <img class="top-cloud" src="../static/image/cloud.png" alt="top-cloud">
+        <h1>I'm Farahmand</h1>
+        {% if user.is_authenticated %}
+        {% if user.id==2 %}
+        <a class="btn btn-outline-primary " href="{{url_for('main_page')}}">ADD</a>
+        {% endif %}
+        {% endif %}
+        <h3>Math Instructor and Full Stack Python Developer</h3>
+
+        <img class="bottom-cloud" src="../static/image/cloud.png" alt="bottom-cloud">
+        <img class="mountain" src="../static/image/mountain.png" alt="mountain">
+
+        {% else %}
+        <img class="top-cloud" src="{{main.cloud}}" alt="top-cloud">
+        <h1>{{main.main_title}}</h1>
+        {% if user.is_authenticated %}
+        {% if user.id==2 %}
+        <a class="btn btn-outline-primary delete" href="{{url_for('main_delete',id = main.id)}}">Delete</a>
+        <a class="btn btn-outline-primary edit" href="{{url_for('main_edit',id = main.id)}}">Edit</a>
+        {% endif %}
+        {% endif %}
+        <h3>{{main.main_description[3:-6]}}</h3>
+
+        <img class="bottom-cloud" src="{{main.cloud}}" alt="bottom-cloud">
+        <img class="mountain" src="main.main_image" alt="mountain">
+
+        {% endif %}
+    </div>
+</section>
+<section id="skills">
+    <div class="middle-container">
+        {% for data in datas %}
+
+        <img class="profile" src="{{data.image_url}}" alt="code-image">
+        <h2>{{data.title}}</h2>
+        {% if user.is_authenticated %}
+        {% if user.id==2 %}
+        <a class="btn btn-outline-primary edit" href="{{url_for('profile_edit',id=data.id)}}">Edit</a>
+        <a class="btn btn-outline-primary delete" href="{{url_for('delete_pro',id=data.id)}}">Delete</a>
+        {% endif %}
+        {% endif %}
+        <div class="container-fluid  col-lg-7 col-md-9 col-sm-11 skill" style="text-align: justify">
+            <p class="skill">{{data.content[:140]|safe}}<a href="{{url_for('pro_description',id=data.id)}}">...Read
+                more</a></p>
+        </div>
+        {% endfor %}
+        <hr>
+
+        <h2>My Skills</h2>
+
+        {% if user.is_authenticated %}
+        {% if user.id==2 %}
+        <p><a class="btn btn-outline-primary" href="{{url_for('add_skill')}}">Add skill</a></p>
+        {% endif %}
+        {% endif %}
+        {% for skill in skills %}
+        <img class="profile skill_image" src="{{skill.image_url}}" alt="">
+        <h2>{{skill.title}}</h2>
+        <div class="container-fluid col-lg-7 col-md-9 col-sm-11 skill " style="text-align: justify">
+
+            <p>{{skill.content[:140]|safe}}<a href="{{url_for('skill_description',id=skill.id)}}">...Read more</a></p>
+
+        </div>
+        {% if user.is_authenticated %}
+        {% if user.id==2 %}
+        <p>
+            <a class="btn btn-outline-primary edit" href="{{url_for('edit_skill',id=skill.id)}}">Edit</a>
+            <a class="btn btn-outline-primary delete" href="{{url_for('delete_skill',id=skill.id)}}">Delete</a>
+        </p>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+<hr>
+<section id="contact">
+    <h2>Get in touch with me</h2>
+    <a class="btn btn-primary btn-lg" href="mailto:ihsanullahfarahmand9071@gmail.com?subject=feedback">Mail Me</a>
+</section>
+
+{% endblock %}
+{% include("footer.html") %}

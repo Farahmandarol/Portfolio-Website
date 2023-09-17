@@ -1,0 +1,50 @@
+{% include("header.html") %}
+{% block  body %}
+
+<div class="quote-container middle-container">
+    <h2 class="quote_title">The most Influential quotes</h2>
+    <div class="container-fluid quote-page col-lg-7 col-md-9 col-sm-11">
+
+        <h3>Why Motivation is important?</h3>
+        <p class="post_explanation ">
+            Motivation reflects something unique about each one of us and allows us to gain valued outcomes like
+            improved
+            performance, enhanced wellbeing, personal growth, or a sense of purpose. Motivation is a pathway to change
+            our
+            way of thinking, feeling, and behaving.
+        </p>
+    </div>
+    {% for quote in quotes %}
+    <div class="quote-page ">
+        <div class="container-fluid poster col-lg-7 col-md-9 col-sm-11">
+            <p class="profile_text">Posted by: <span class="name_">{{quote.user_name}}</span></p>
+        </div>
+        <div class="container-fluid quote-box col-lg-7 col-md-9 col-sm-11">
+            <div class="quote">
+                <blockquote class="post_content">
+                    {{quote.quote|safe}}
+                </blockquote>
+            </div>
+            <div class="name quote_author">
+                {{quote.author}}
+            </div>
+            <!--               like button                        -->
+
+            <!--           like button <<<                        -->
+        </div>
+        {% if user.is_authenticated %}
+        {% if user.id == quote.user_id or user.id == 2%}
+
+        <a class=" btn edit" href="{{url_for('edit',i = quote.id)}}">Edit</a>
+        <a class=" btn delete" href="{{url_for('delete',i = quote.id)}}">Delete</a>
+        {% endif %}
+        {% endif %}
+
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+{% include("footer.html") %}

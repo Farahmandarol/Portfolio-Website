@@ -1,0 +1,28 @@
+{% include("header.html") %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block  body %}
+<div class="container-fluid  col-lg-7 col-md-9 col-sm-11">
+    <p class="register_text ml-auto">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+
+        {% for message in messages %}
+    <p style="color: red !important;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    </p>
+</div>
+<div class="container-fluid card col-lg-7 col-md-9 col-sm-11  ">
+    <h4 class="register">Register</h4>
+    <div class="card-body">
+        {{ wtf.quick_form(form, button_map={'submit':'btn  btn-primary btn-block'}) }}
+    </div>
+    <p style="padding-bottom: 10px">if you have already an account <a class="btn bg-primary" href="{{url_for('login')}}">Login</a></p>
+
+</div>
+
+
+{% endblock %}
+
+{% include("footer.html") %}

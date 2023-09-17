@@ -1,0 +1,30 @@
+{% include("header.html") %}
+{% block  body %}
+
+
+<section id="skills">
+    <div class="middle-container">
+
+        <img class="profile skill_image" src="{{skill.image_url}}" alt="">
+        <h2>{{skill.title}}</h2>
+        <div class="container-fluid col-lg-7 col-md-9 col-sm-11 skill " style="text-align: justify">
+
+            <p>{{skill.content|safe}}</p>
+
+        </div>
+        {% if user.is_authenticated %}
+        {% if user.id==2 %}
+        <p>
+            <a class="btn btn-outline-primary edit" href="{{url_for('profile_edit',id=skill.id)}}">Edit</a>
+            <a class="btn btn-outline-primary delete" href="{{url_for('delete_pro',id=skill.id)}}">Delete</a>
+        </p>
+        {% endif %}
+        {% endif %}
+
+    </div>
+</section>
+
+
+{% endblock %}
+
+{% include("footer.html") %}

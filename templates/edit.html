@@ -1,0 +1,24 @@
+{% include("header.html") %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block  body %}
+
+<p></p>
+<div class="container-fluid card col-lg-7 col-md-9 col-sm-11 edit_box ">
+    <h4 class="register">Edit your inspirational quote</h4>
+    <div class="card-body">
+        {{ ckeditor.load() }}
+
+        <!--        #Configure the ckeditor to tell it which field in WTForm will need to be a CKEditor.-->
+        {{ ckeditor.config(name='quote') }}
+
+        <!--        #Add WTF quickform-->
+
+        {{ wtf.quick_form(form, novalidate=False, button_map={"submit": "primary"}) }}
+    </div>
+</div>
+<h1></h1>
+
+
+{% endblock %}
+
+{% include("footer.html") %}

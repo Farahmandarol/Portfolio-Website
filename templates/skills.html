@@ -1,0 +1,29 @@
+{% include("header.html") %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block  body %}
+
+<p class="container-fluid register_text ml-auto col-lg-7 col-md-9 col-sm-11 post_explanation"></p>
+<div class="container-fluid card col-lg-7 col-md-9 col-sm-11">
+    <h4 class="register">Add a skill</h4>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p style="color: red !important;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="card-body">
+        {{ ckeditor.load() }}
+
+        <!--        #Configure the ckeditor to tell it which field in WTForm will need to be a CKEditor.-->
+        {{ ckeditor.config(name='quote') }}
+
+        <!--        #Add WTF quickform-->
+
+        {{ wtf.quick_form(form, novalidate=False, button_map={"submit": "primary"}) }}
+    </div>
+</div>
+
+{% endblock %}
+
+{% include("footer.html") %}

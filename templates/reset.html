@@ -1,0 +1,25 @@
+{% include("header.html") %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block  body %}
+
+<p class="register_text ml-auto"></p>
+<div class="container-fluid card col-lg-7 col-md-9 col-sm-11 ">
+    <h4 class="register">Reset Password</h4>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for message in messages %}
+    <p style="color: red !important;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="card-body">
+        {{ wtf.quick_form(form, button_map={'send_code':'btn btn-primary'}) }}
+    </div>
+    </p>
+</div>
+
+
+{% endblock %}
+
+{% include("footer.html") %}
